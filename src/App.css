@@ -15,7 +15,7 @@ body {
 }
 
 .machine {
-  height: 70vh;
+  height: 75vh;
   width: 50vh;
   background-color: grey;
   border: solid black 3px;
@@ -65,4 +65,29 @@ body {
   justify-content: center;
   align-items: center;
   font-size: larger;
+}
+
+.clearSection {
+  
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  justify-content: flex-end;
+  text-align: center;
+  width: 90%;
+}
+
+.clearSection .key {
+  border: solid rgb(78, 76, 76) 3px;
+  border-radius: 1em;
+  background-color:  firebrick;
+  color: aliceblue;
+  width: 15%;
+  height: 5vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

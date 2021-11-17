@@ -4,11 +4,24 @@ export default function Keyboard() {
     const [value, setValue] = useState('');
     const [firstEntry, setFirstEntry] = useState();
     const [operation, setOperation] = useState();
+    const [ritorno, setRitorno] = useState('');
+    
 
     const operationalValues = ['-', '+', '/', '*'];
+    let result = 0;
+
+   
+    const clear = () => {
+        setValue('');
+        setRitorno('');
+    }
 
     const handleClick = (e) => {
+        e.preventDefault();
         const input = e.target.id;
+        if (input === 'canc') {
+            clear();
+        }
         if (operationalValues.some(val => val === input) || input === '=') {
             if (value === 0) {
                 return
@@ -17,17 +30,21 @@ export default function Keyboard() {
                 setFirstEntry(Number(value));
                 setValue('');
                 } else if (input === '='){
-                    console.log(value);
-                    console.log(operation);
-                    let secondEntry = Number(value)
-                    let result = (eval(`${firstEntry} ${operation} ${secondEntry}`));
-                    setValue(result)
                    
+                    let secondEntry = Number(value)
+                    result = (eval(`${firstEntry} ${operation} ${secondEntry}`));
+                    setValue(result);
+                    setRitorno(result);       
+            }    
+        } else if (input !== 'canc' && input !== operationalValues.some(val => val === input) ){
+            if (ritorno !== ''){
+                clear();    
+                setValue(input);
+            } else {
+                setValue( value + input);
             }
-            
-        } else {
-            setValue( value + input);
-        }
+           
+        } 
         
     }
 
@@ -36,8 +53,11 @@ export default function Keyboard() {
             <div className='screen'>
                 <p>{value}</p>
             </div>
+            <div className='clearSection'>
+                <div className='key' id='canc' onClick={handleClick}>C</div>
+            </div>
             <div className='keyboard'>
-                <div className='key' id='7' onClick={handleClick}>7</div>
+                <div className='key number' id='7' onClick={handleClick}>7</div>
                 <div className='key' id='8' onClick={handleClick}>8</div>
                 <div className='key' id='9' onClick={handleClick}>9</div>
                 <div className='key' id='/' onClick={handleClick}>/</div>
